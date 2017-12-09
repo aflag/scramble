@@ -32,8 +32,17 @@ class ScrambleTestCase(unittest.TestCase):
     def test_empty_string(self):
         self.assertEqual(scramble.scramble(""), "")
 
-    def test_small_word(self):
-        self.assertEqual(scramble.scramble("fact"), "tacf")
+    def test_one_letter(self):
+        self.assertEqual(scramble.scramble("a"), "a")
 
-    def test_big_sentence(self):
-        self.assertEqual(scramble.scramble("I am writing a big sentence here."), "trarhwmicisg   t.g nnnbeeIe  eaei")
+    def test_two_letters(self):
+        self.assertEqual(scramble.scramble("ab"), "ba")
+
+    def test_same_letters(self):
+        self.assertEqual(scramble.scramble("aa"), "aa")
+
+    def test_small_word(self):
+        scrambled = scramble.scramble("fact")
+        self.assertEqual(set(scrambled), set("fact"))
+        self.assertEqual(len(scrambled), len("fact"))
+        self.assertNotEqual(scrambled, "fact")
