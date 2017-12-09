@@ -33,7 +33,7 @@ class ScrambleTestCase(unittest.TestCase):
         self.assertEqual(scramble.scramble(""), "")
 
     def test_small_word(self):
-        self.assertEqual(scramble.scramble("fact"), "cfta")
+        self.assertEqual(scramble.scramble("fact"), "tacf")
 
     def test_big_sentence(self):
-        self.assertEqual(scramble.scramble("I am writing a big sentence here."), "eeegeew.tr   ii iabsn nmgct nIrha")
+        self.assertEqual(scramble.scramble("I am writing a big sentence here."), "trarhwmicisg   t.g nnnbeeIe  eaei")

@@ -49,17 +49,22 @@ def scramble(s):
     """This is a greedy algorithm which attempts to compute the most distant
     string from s, as measured with get_anagram_distance. It may result in
     suboptimal results"""
-    farthest = s
+    scrambled = s
     while True:
-        better_found = False
-        for i, j in _swaps(s):
-            s2 = _swap(farthest, i, j)
-            if get_anagram_distance(s, s2) > get_anagram_distance(s, farthest):
-                better_found = True
-                farthest = s2
-        if not better_found:
+        swapped = _get_next_swap(s, scrambled)
+        if swapped == scrambled:
             break
-    return farthest
+        scrambled = swapped
+    return scrambled
+
+
+def _get_next_swap(s, scrambled):
+    best_swap = scrambled
+    for i, j in _swaps(scrambled):
+        s2 = _swap(scrambled, i, j)
+        if get_anagram_distance(s, s2) > get_anagram_distance(s, best_swap):
+            best_swap = s2
+    return best_swap
 
 
 def _digrams(s):
