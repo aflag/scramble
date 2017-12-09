@@ -37,16 +37,15 @@ def get_anagram_distance(s1, s2):
     return len(s1_digrams)
 
 
-def best_scramble(s):
-    """The best scramble is guaranteed to produce the most distant string from
-    s, as measured with get_anagram_distance. This is done at the cost of a O(n!)
-    algorithm, which checks all permutations."""
-    farthest = s
+def get_all_distances(s):
+    """This method tries all permutations of s and calculate their distance
+    based on get_anagram_distance"""
+    distances = {}
     for s2 in permutations(s):
         s2 = ''.join(s2)
-        if get_anagram_distance(s, s2) > get_anagram_distance(s, farthest):
-            farthest = s2
-    return farthest
+        distance = get_anagram_distance(s, s2)
+        distances.setdefault(distance, set()).add(s2)
+    return distances
 
 
 def scramble(s):

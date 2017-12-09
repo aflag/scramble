@@ -18,13 +18,32 @@ class GetDistanceTestCase(unittest.TestCase):
         self.assertEqual(scramble.get_anagram_distance("fact", "atfc"), 8)
 
 
-class BestScrambleTestCase(unittest.TestCase):
+class GetAllDistancesTestCase(unittest.TestCase):
 
     def test_empty_string(self):
-        self.assertEqual(scramble.best_scramble(""), "")
+        self.assertEqual(scramble.get_all_distances(""), {0: {""}})
 
-    def test_fact(self):
-        self.assertEqual(scramble.best_scramble("fact"), "atfc")
+    def test_two_chars(self):
+        expected = {
+            0: {"ab"},
+            2: {"ba"},
+        }
+        self.assertEqual(scramble.get_all_distances("ab"), expected)
+
+    def test_repeated(self):
+        expected = {
+            0: {"aa"},
+        }
+        self.assertEqual(scramble.get_all_distances("aa"), expected)
+
+    def test_abc(self):
+        expected = {
+            0: {"abc"},
+            2: {"cba"},
+            3: {"acb", "bac"},
+            4: {"cab", "bca"},
+        }
+        self.assertEqual(scramble.get_all_distances("abc"), expected)
 
 
 class ScrambleTestCase(unittest.TestCase):
